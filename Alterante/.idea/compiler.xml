@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="demo3" />
+        <module name="demo4" />
+        <module name="ssia-ch5-ex4" />
+        <module name="task_3" />
+        <module name="SimpleJWT" />
+        <module name="sq-ch14-ex1 (1)" />
+        <module name="seminar-6-hw-1" />
+        <module name="Exam2Sem2" />
+        <module name="example4sem6_rikky_and_morty_rest" />
+        <module name="example2sem1" />
+        <module name="myapp" />
+        <module name="demo" />
+        <module name="eureka-server" />
+        <module name="sem3HomeTask" />
+        <module name="sem3example2REST" />
+        <module name="Exam4Sem2" />
+        <module name="spring_data_exam" />
+        <module name="ssia-ch6-ex1" />
+        <module name="sq-ch9-ex1" />
+        <module name="microservize-1" />
+        <module name="sq-ch9-ex3" />
+        <module name="microservize-2" />
+        <module name="Exam3Sem2" />
+        <module name="exampleOpenFaign" />
+        <module name="payment" />
+        <module name="sem5_springdata_ex2" />
+        <module name="shop-microservizes (2)" />
+        <module name="seminar_2" />
+        <module name="sem3exampl1" />
+        <module name="SpringSecurity" />
+        <module name="empl3sem8" />
+        <module name="Task_1_1" />
+        <module name="sq-ch14-ex1 (2)" />
+        <module name="seminar_1" />
+        <module name="sq-ch8-ex6" />
+        <module name="sq-ch13-ex1" />
+        <module name="Example2Seminar4" />
+        <module name="empl6sem8interceptors" />
+        <module name="spring_security_demo" />
+        <module name="example_2_seminar_5" />
+        <module name="SpringBoot3.2.0" />
+        <module name="Empl1Sem8" />
+        <module name="Exam1Sem2" />
+        <module name="Example1Seminar4" />
+        <module name="shop-microservizes (1)" />
+        <module name="shop-microservizes (3)" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Example1Seminar4" options="-parameters" />
+      <module name="Example2Seminar4" options="-parameters" />
+      <module name="SimpleJWT" options="-parameters" />
+      <module name="SpringBoot3.2.0" options="-parameters" />
+      <module name="SpringSecurity" options="-parameters" />
+      <module name="Task_1_1" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="demo3" options="-parameters" />
+      <module name="demo4" options="-parameters" />
+      <module name="empl3sem8" options="-parameters" />
+      <module name="empl6sem8interceptors" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="example4sem6_rikky_and_morty_rest" options="-parameters" />
+      <module name="exampleOpenFaign" options="-parameters" />
+      <module name="example_2_seminar_5" options="-parameters" />
+      <module name="microservize-1" options="-parameters" />
+      <module name="microservize-2" options="-parameters" />
+      <module name="payment" options="-parameters" />
+      <module name="sem3HomeTask" options="-parameters" />
+      <module name="sem3exampl1" options="-parameters" />
+      <module name="sem3example2REST" options="-parameters" />
+      <module name="sem5_springdata_ex2" options="-parameters" />
+      <module name="seminar-6-hw-1" options="-parameters" />
+      <module name="seminar_2" options="-parameters" />
+      <module name="spring_data_exam" options="-parameters" />
+      <module name="spring_security_demo" options="-parameters" />
+      <module name="sq-ch13-ex1" options="-parameters" />
+      <module name="sq-ch14-ex1 (1)" options="-parameters" />
+      <module name="sq-ch14-ex1 (2)" options="-parameters" />
+      <module name="sq-ch8-ex6" options="-parameters" />
+      <module name="sq-ch9-ex1" options="-parameters" />
+      <module name="sq-ch9-ex3" options="-parameters" />
+      <module name="ssia-ch5-ex4" options="-parameters" />
+      <module name="ssia-ch6-ex1" options="-parameters" />
+      <module name="task_3" options="-parameters" />
+    </option>
+  </component>
+</project>
