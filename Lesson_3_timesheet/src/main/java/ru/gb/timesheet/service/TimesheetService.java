@@ -1,9 +1,12 @@
 package ru.gb.timesheet.service;
 
 import org.springframework.stereotype.Service;
+import ru.gb.timesheet.model.Project;
 import ru.gb.timesheet.model.Timesheet;
+import ru.gb.timesheet.repository.ProjectRepository;
 import ru.gb.timesheet.repository.TimesheetRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 /*
@@ -18,9 +21,11 @@ import java.util.Optional;
 public class TimesheetService {
 
     private final TimesheetRepository repository;
+    private final ProjectRepository projectRepository;
 
-    public TimesheetService(TimesheetRepository repository) {
+    public TimesheetService(TimesheetRepository repository,ProjectRepository projectRepository) {
         this.repository = repository;
+        this.projectRepository = projectRepository;
     }
 
     /**
@@ -49,7 +54,15 @@ public class TimesheetService {
      * @return созданный табель.
      */
     public Timesheet create(Timesheet timesheet) {
-        return repository.create(timesheet);
+        Optional<Project> project = projectRepository.getById(timesheet.getProjectId());
+        // Проверка существует ли проект
+        if (project.isPresent()) {
+            // Установка текущей даты на стороне сервера
+            timesheet.setCreatedAt(LocalDate.now());
+            return repository.create(timesheet);
+        } else {
+            throw new IllegalArgumentException("Project with id " + timesheet.getProjectId() + " does not exist");
+        }
     }
 
     /**
@@ -59,6 +72,11 @@ public class TimesheetService {
      */
     public void delete(Long id) {
         repository.delete(id);
+    }
+
+
+    public List<Timesheet> getByProjectId(Long projectId) {
+        return repository.getByProjectId(projectId);
     }
 
 }

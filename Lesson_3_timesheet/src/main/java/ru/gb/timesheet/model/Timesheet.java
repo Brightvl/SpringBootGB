@@ -19,9 +19,9 @@ public class Timesheet {
      */
     private Long id;
     /**
-     * Название проекта.
+     * id проекта.
      */
-    private String project;
+    private Long projectId;
     /**
      * Количество минут, затраченных на проект.
      */

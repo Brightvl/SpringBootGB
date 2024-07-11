@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Репозиторий для управления табелями учета рабочего времени.
@@ -68,5 +69,13 @@ public class TimesheetRepository {
                 .findFirst()
                 .ifPresent(timesheets::remove); // если нет - иногда посылают 404 Not Found
     }
+
+
+    public List<Timesheet> getByProjectId(Long projectId) {
+        return timesheets.stream()
+                .filter(it -> Objects.equals(it.getProjectId(), projectId))
+                .collect(Collectors.toList());
+    }
+
 
 }
