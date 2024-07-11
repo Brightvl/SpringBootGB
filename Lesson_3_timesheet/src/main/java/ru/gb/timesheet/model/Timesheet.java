@@ -4,12 +4,31 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/*
+Модель представляет собой данные и их логику.
+Это классы, которые соответствуют таблицам базы данных и содержат данные, которые приложение будет обрабатывать.
+ */
+
+/**
+ * Модель данных для табеля учета рабочего времени.
+ */
 @Data
 public class Timesheet {
-
-  private Long id;
-  private String project;
-  private int minutes;
-  private LocalDate createdAt;
+    /**
+     * Идентификатор табеля.
+     */
+    private Long id;
+    /**
+     * Название проекта.
+     */
+    private String project;
+    /**
+     * Количество минут, затраченных на проект.
+     */
+    private int minutes;
+    /**
+     * Дата создания табеля.
+     */
+    private LocalDate createdAt;
 
 }

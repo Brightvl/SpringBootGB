@@ -8,34 +8,65 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Репозиторий для управления табелями учета рабочего времени.
+ */
 @Repository // @Component для классов, работающих с данными
 public class TimesheetRepository {
 
-  private static Long sequence = 1L;
-  private final List<Timesheet> timesheets = new ArrayList<>();
+    /**
+     * Порядковый номер id
+     */
+    private static Long sequence = 1L;
+    /**
+     * Список табелей
+     */
+    private final List<Timesheet> timesheets = new ArrayList<>();
 
-  public Optional<Timesheet> getById(Long id) {
-    // select * from timesheets where id = $id
-    return timesheets.stream()
-      .filter(it -> Objects.equals(it.getId(), id))
-      .findFirst();
-  }
+    /**
+     * Найти табель по идентификатору.
+     *
+     * @param id идентификатор табеля.
+     * @return Optional с табелем или пустой Optional, если табель не найден.
+     */
+    public Optional<Timesheet> getById(Long id) {
+        // select * from timesheets where id = $id
+        return timesheets.stream()
+                .filter(it -> Objects.equals(it.getId(), id))
+                .findFirst();
+    }
 
-  public List<Timesheet> getAll() {
-    return List.copyOf(timesheets);
-  }
+    /**
+     * Получить все табели.
+     *
+     * @return список всех табелей.
+     */
+    public List<Timesheet> getAll() {
+        return List.copyOf(timesheets);
+    }
 
-  public Timesheet create(Timesheet timesheet) {
-    timesheet.setId(sequence++);
-    timesheets.add(timesheet);
-    return timesheet;
-  }
+    /**
+     * Создать новый табель.
+     *
+     * @param timesheet данные нового табеля.
+     * @return созданный табель.
+     */
+    public Timesheet create(Timesheet timesheet) {
+        timesheet.setId(sequence++);
+        timesheets.add(timesheet);
+        return timesheet;
+    }
 
-  public void delete(Long id) {
-    timesheets.stream()
-      .filter(it -> Objects.equals(it.getId(), id))
-      .findFirst()
-      .ifPresent(timesheets::remove); // если нет - иногда посылают 404 Not Found
-  }
+    /**
+     * Удалить табель по идентификатору.
+     *
+     * @param id идентификатор табеля.
+     */
+    public void delete(Long id) {
+        timesheets.stream()
+                .filter(it -> Objects.equals(it.getId(), id))
+                .findFirst()
+                .ifPresent(timesheets::remove); // если нет - иногда посылают 404 Not Found
+    }
 
 }
