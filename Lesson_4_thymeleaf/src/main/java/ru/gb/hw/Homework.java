@@ -1,4 +1,4 @@
-package ru.gb.timesheet.hw;
+package ru.gb.hw;
 
 public class Homework {
 

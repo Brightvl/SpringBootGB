@@ -2,10 +2,18 @@ package ru.gb.timesheet.model;
 
 import lombok.Data;
 
+/**
+ * Класс, представляющий проект.
+ */
 @Data
 public class Project {
-
-  private Long id;
-  private String name;
+    /**
+     * Идентификатор проекта
+     */
+    private Long id;
+    /**
+     * Название проекта
+     */
+    private String name;
 
 }

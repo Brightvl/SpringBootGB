@@ -8,33 +8,58 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Репозиторий для управления проектами.
+ */
 @Repository
 public class ProjectRepository {
 
-  private static Long sequence = 1L;
-  private final List<Project> projects = new ArrayList<>();
+    private static Long sequence = 1L;
+    private final List<Project> projects = new ArrayList<>();
 
-  public Optional<Project> findById(Long id) {
-    return projects.stream()
-      .filter(it -> Objects.equals(it.getId(), id))
-      .findFirst();
-  }
+    /**
+     * Поиск проекта по идентификатору.
+     *
+     * @param id идентификатор проекта
+     * @return найденный проект, если существует
+     */
+    public Optional<Project> findById(Long id) {
+        return projects.stream()
+                .filter(it -> Objects.equals(it.getId(), id))
+                .findFirst();
+    }
 
-  public List<Project> findAll() {
-    return List.copyOf(projects);
-  }
+    /**
+     * Поиск всех проектов.
+     *
+     * @return список всех проектов
+     */
+    public List<Project> findAll() {
+        return List.copyOf(projects);
+    }
 
-  public Project create(Project project) {
-    project.setId(sequence++);
-    projects.add(project);
-    return project;
-  }
+    /**
+     * Создание нового проекта.
+     *
+     * @param project создаваемый проект
+     * @return созданный проект
+     */
+    public Project create(Project project) {
+        project.setId(sequence++);
+        projects.add(project);
+        return project;
+    }
 
-  public void delete(Long id) {
-    projects.stream()
-      .filter(it -> Objects.equals(it.getId(), id))
-      .findFirst()
-      .ifPresent(projects::remove);
-  }
+    /**
+     * Удаление проекта по идентификатору.
+     *
+     * @param id идентификатор проекта
+     */
+    public void delete(Long id) {
+        projects.stream()
+                .filter(it -> Objects.equals(it.getId(), id))
+                .findFirst()
+                .ifPresent(projects::remove);
+    }
 
 }

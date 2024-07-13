@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project page</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="-details">
+    <h1>Проект #<span th:text="${project.id}"></span></h1>
+    Название: <span th:text="${project.name}"></span>
+
+    <a th:href="@{'/home/projects'}">Назад к проектам</a>
+    <a th:href="@{'/home/projects'}">Посмотреть заметки </a>
+</div>
+
+</body>
+</html>

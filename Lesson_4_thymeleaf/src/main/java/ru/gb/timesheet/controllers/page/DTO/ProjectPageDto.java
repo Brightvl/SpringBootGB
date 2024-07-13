@@ -1,4 +1,4 @@
-package ru.gb.timesheet.page;
+package ru.gb.timesheet.controllers.page.DTO;
 
 import lombok.Data;
 
@@ -7,11 +7,14 @@ import lombok.Data;
  * Т.е. он нужен для передачи параметров внутрь thymeleaf в тех контроллерах, которые сразу отдают HTML-страницы.
  */
 @Data
-public class TimesheetPageDto {
-
-  private String projectName;
-  private String id;
-  private String minutes;
-  private String createdAt;
+public class ProjectPageDto {
+    /**
+     * Идентификатор проекта
+     */
+    private Long id;
+    /**
+     * Название проекта
+     */
+    private String name;
 
 }
