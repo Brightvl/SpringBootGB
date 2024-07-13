@@ -10,22 +10,29 @@
 </head>
 <body>
 <h1>Проекты</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Название</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="project : ${projects}">
-        <td><span th:text="${project.id}"></span></td>
-        <td><span th:text="${project.name}"></span></td>
-        <td><a th:href="@{'/home/projects/{id}'(id=${project.id})}">Перейти к проекту</a></td>
-    </tr>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projects}">
+            <td><span th:text="${project.id}"></span></td>
+            <td><span th:text="${project.name}"></span></td>
+            <td><a th:href="@{'/home/projects/{id}'(id=${project.id})}">Перейти к проекту</a></td>
+            <td><a th:href="@{'/home/timesheets/projects/{projectId}'(projectId=${project.id})}">Посмотреть заметки</a></td>
+
+        </tr>
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+
+<a href="javascript:history.back()">Вернуться назад</a>
+
 </body>
 </html>

@@ -29,4 +29,9 @@ public class TimesheetPageDto {
 
     private String createdAt;
 
+    /**
+     * Идентификатор проекта
+     */
+    private Long projectId;
+
 }

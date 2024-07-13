@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home / Timesheet Page</title>
+    <title>Home / Timesheet Page</title><link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 <h1>Запись рабочего времени #<span th:text="${timesheet.id}"></span></h1>
@@ -13,5 +13,6 @@
 Минут потрачено: <span th:text="${timesheet.minutes}"></span> <br>
 Дата создания: <span th:text="${timesheet.createdAt}"></span> <br>
 
+<a href="javascript:history.back()">Вернуться назад</a>
 </body>
 </html>

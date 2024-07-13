@@ -69,9 +69,9 @@ public class TimesheetPageService {
         TimesheetPageDto timesheetPageParameters = new TimesheetPageDto();
         timesheetPageParameters.setProjectName(project.getName());
         timesheetPageParameters.setId(String.valueOf(timesheet.getId()));
-        // 150 -> 2h30m
         timesheetPageParameters.setMinutes(String.valueOf(timesheet.getMinutes()));
         timesheetPageParameters.setCreatedAt(timesheet.getCreatedAt().format(DateTimeFormatter.ISO_DATE));
+        timesheetPageParameters.setProjectId(project.getId());  // Установка идентификатора проекта
 
         return timesheetPageParameters;
     }
