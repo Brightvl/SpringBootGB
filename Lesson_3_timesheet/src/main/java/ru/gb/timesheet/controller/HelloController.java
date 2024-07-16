@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-  // GET http://localhost:8080/hello?username=Igor
-  // @RequestParam(required = false) -> Hello null! если передадим http://localhost:8080/hello
-  // @RequestParam("username") String arg ->  для того чтобы указать что угодно в аргументах
-  @GetMapping("/hello")
-  public String helloPage(@RequestParam String username) {
-    return "<h1>Hello, " + username + "!</h1>";
-  }
+    // GET http://localhost:8080/hello?username=Igor
+    // @RequestParam(required = false) -> Hello null! если передадим http://localhost:8080/hello
+    // @RequestParam("username") String arg ->  для того чтобы указать что угодно в аргументах
+    @GetMapping("/hello")
+    public String helloPage(@RequestParam String username) {
+        return "<h1>Hello, " + username + "!</h1>";
+    }
 
-  // GET http://localhost:8080/hello/igor
-  // GET http://localhost:8080/hello/alex
-  @GetMapping("/hello/{username}")
-  public String helloPagePathVariable(@PathVariable String username) {
-    return "<h1>Hello, " + username + "!</h1>";
-  }
+    // GET http://localhost:8080/hello/igor
+    // GET http://localhost:8080/hello/alex
+    @GetMapping("/hello/{username}")
+    public String helloPagePathVariable(@PathVariable String username) {
+        return "<h1>Hello, " + username + "!</h1>";
+    }
 
 }

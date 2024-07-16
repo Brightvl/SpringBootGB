@@ -23,7 +23,7 @@ public class TimesheetService {
     private final TimesheetRepository repository;
     private final ProjectRepository projectRepository;
 
-    public TimesheetService(TimesheetRepository repository,ProjectRepository projectRepository) {
+    public TimesheetService(TimesheetRepository repository, ProjectRepository projectRepository) {
         this.repository = repository;
         this.projectRepository = projectRepository;
     }
