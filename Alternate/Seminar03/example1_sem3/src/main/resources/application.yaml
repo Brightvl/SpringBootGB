@@ -1,0 +1,5 @@
+spring:
+  application:
+     name: example1_sem3
+server:
+  port: 8090

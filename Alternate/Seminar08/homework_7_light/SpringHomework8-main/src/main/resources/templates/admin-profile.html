@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Книжный магазин</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body class="bod">
+
+<br>
+<span sec:authorize="hasRole('USER')" class="nav">&nbsp;&nbsp;&nbsp;Статус: пользователь&nbsp;&nbsp;&nbsp;</span>
+<span sec:authorize="hasRole('ADMIN')" class="nav">&nbsp;&nbsp;&nbsp;Статус: администратор&nbsp;&nbsp;&nbsp;</span>
+
+<form class="link" th:action="@{/logout}" method="post" style="display: inline;">
+    <button class="linkbutton" type="submit">&nbsp;&nbsp;Выйти&nbsp;&nbsp;</button>
+</form>
+
+<h1>Книжный магазин</h1>
+<img th:src="@{/css/logo.jpg}" alt=""/>
+<br>
+<p></p>
+<br>
+<span class="rev">Выручка: </span><span class="rev" th:text="${revenue}"></span>
+<br>
+<h2>Все книги:</h2>
+
+<table class="tab">
+    <tr>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Цена</th>
+        <th>Номер полки</th>
+    </tr>
+    <tr th:each="b: ${books}">
+        <td th:text="${b.name}"></td>
+        <td th:text="${b.author}"></td>
+        <td th:text="${b.price}"></td>
+        <td th:text="${b.shelf}"></td>
+        <td><a th:href="@{book-sell/{name}(name=${b.name})}">Продать</a></td>
+    </tr>
+</table>
+
+<br>
+<br>
+
+<h3>Добавить новую книгу:</h3>
+<form action="/admin-profile" method="post">
+    Название: <input class="inp" required type="text" name="name"><br/>
+    Автор: <input class="inp" required type="text" name="author"><br/>
+    Цена: <input class="inp" required type="number" step="any" name="price"><br/>
+    Номер полки: <input class="inp" required type="number" step="any" name="shelf"><br/>
+    <button class="enter" type="submit">Добавить</button>
+</form>
+</body>
+</html>

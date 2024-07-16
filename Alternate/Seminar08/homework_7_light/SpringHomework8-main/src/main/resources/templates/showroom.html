@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Книжный магазин</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body class="bod">
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<h1>Книжный магазин</h1>
+<img th:src="@{/css/logo.jpg}" style="width: 560px;" alt="Изображение недоступно"/>
+<br>
+<h2>Витрина:</h2>
+
+<table class="tab">
+    <tr>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Цена</th>
+        <th>Номер полки</th>
+    </tr>
+    <tr th:each="b: ${books}">
+        <td th:text="${b.name}"></td>
+        <td th:text="${b.author}"></td>
+        <td th:text="${b.price}"></td>
+        <td th:text="${b.shelf}"></td>
+    </tr>
+</table>
+
+<form class="link" th:action="@{/login}" method="GET" style="display: block;">
+    <button class="authbutton" type="submit">&nbsp;&nbsp;&nbsp;Авторизоваться&nbsp;&nbsp;&nbsp;</button>
+</form>
+
+</body>
+</html>
