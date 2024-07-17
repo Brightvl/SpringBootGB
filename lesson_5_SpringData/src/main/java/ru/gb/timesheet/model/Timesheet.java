@@ -1,12 +1,9 @@
 package ru.gb.timesheet.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.Id;
+
 
 import java.time.LocalDate;
 
@@ -26,5 +23,8 @@ public class Timesheet {
   private Long projectId;
   private Integer minutes;
   private LocalDate createdAt;
+  @ManyToOne
+  @JoinColumn(name = "employee_id")
+  private Employee employee;
 
 }

@@ -1,4 +1,4 @@
-package ru.gb.timesheet.rest;
+package ru.gb.timesheet.controllers.rest;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

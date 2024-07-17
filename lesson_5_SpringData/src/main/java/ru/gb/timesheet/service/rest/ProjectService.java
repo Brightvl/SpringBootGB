@@ -1,4 +1,4 @@
-package ru.gb.timesheet.service;
+package ru.gb.timesheet.service.rest;
 
 
 import org.springframework.stereotype.Service;

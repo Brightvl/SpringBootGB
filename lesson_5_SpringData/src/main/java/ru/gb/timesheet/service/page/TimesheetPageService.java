@@ -1,11 +1,13 @@
-package ru.gb.timesheet.service;
+package ru.gb.timesheet.service.page;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gb.timesheet.page.TimesheetPageDto;
+import ru.gb.timesheet.controllers.page.TimesheetPageDto;
 import ru.gb.timesheet.model.Project;
 import ru.gb.timesheet.model.Timesheet;
+import ru.gb.timesheet.service.rest.ProjectService;
+import ru.gb.timesheet.service.rest.TimesheetService;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;

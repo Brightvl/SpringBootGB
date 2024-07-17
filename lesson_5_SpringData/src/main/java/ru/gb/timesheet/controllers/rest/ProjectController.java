@@ -1,4 +1,4 @@
-package ru.gb.timesheet.rest;
+package ru.gb.timesheet.controllers.rest;
 
 
 import org.springframework.http.HttpStatus;
@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.timesheet.model.Project;
 import ru.gb.timesheet.model.Timesheet;
-import ru.gb.timesheet.service.ProjectService;
+import ru.gb.timesheet.service.rest.ProjectService;
 
 import java.util.List;
 import java.util.NoSuchElementException;

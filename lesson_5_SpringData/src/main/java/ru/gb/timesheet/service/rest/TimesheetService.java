@@ -1,4 +1,4 @@
-package ru.gb.timesheet.service;
+package ru.gb.timesheet.service.rest;
 
 import org.springframework.stereotype.Service;
 import ru.gb.timesheet.model.Timesheet;
@@ -31,8 +31,6 @@ public class TimesheetService {
   }
 
   public List<Timesheet> findAll(LocalDate createdAtBefore, LocalDate createdAtAfter) {
-    // FIXME: Вернуть фильтрацию
-
     return timesheetRepository.findAll();
   }
 
@@ -53,4 +51,7 @@ public class TimesheetService {
     timesheetRepository.deleteById(id);
   }
 
+  public List<Timesheet> getAllTimesheetsByEmployeeId(Long employeeId) {
+    return timesheetRepository.findByEmployeeId(employeeId);
+  }
 }

@@ -1,4 +1,4 @@
-package ru.gb.timesheet.rest;
+package ru.gb.timesheet.controllers.rest.exeptions;
 
 
 import lombok.Data;
