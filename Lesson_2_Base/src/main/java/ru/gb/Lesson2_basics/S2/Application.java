@@ -10,35 +10,6 @@ import ru.gb.Lesson2_basics.S2.scope.Singleton;
 @SpringBootApplication
 public class Application {
 
-    /*
-    1. Bean - объект, жизненным циклом которого управляет Spring. (Все объекты созданные Spring)
-    ApplicationContext - контейнер для Bean
-
-    Жизненный цикл Bean
-        @PostConstruct
-        public void init()
-    вызывается в самом начале когда bean создается
-        @PreDestroy
-        public void destroy()
-    вызывается в самом конце когда, например закрывается контекст contest.close()
-    В целом когда контекст открывается Spring ищет у бинов @PostConstruct а при закрытии @PreDestroy
-
-    bean1, bean2, bean3(prototype), ...
-    каждый раз когда мы делаем getBean это по сути тоже что map.get("emailSender") достаем по сути
-    AppContext[bean1, bean2, bean3(prototype)] HashMap<String, Object>
-    ...
-    context.close()
-    -> bean1.preDestroy()
-    когда вызывается @PreDestroy у нас не уничтожается объект (он в хипе/оперативке)
-    уничтожится просто bean из контекста (из HashMap)
-    Spring работает с Java а не напрямую с оперативкой
-
-    2. Когда spring запускается он сначала все сканирует (метки) но пока ничего не создает.
-    HibernateConfiguration про BeanDefinition -> BeanFactory -> Bean
-
-    3. Scope - зона видимости Bean [Singleton, Prototype, | Session, Request, ...]
-     */
-
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);

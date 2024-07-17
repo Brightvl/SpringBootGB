@@ -1,32 +1,66 @@
 ## Описание
 
 `Общее`
-[Application.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS
-2%2FApplication.java)
+![img.png](resources/IoC.png)
 
-`@Component`
-`@Autowired`
-[EmailSender.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fcore%2FEmailSender.java)
+Принцип в том что Spring сам инициализирует объекты добавленные в контейнер.
 
-`@Bean` `BeanDefinition` `@Primary` || `arg()`
-[HibernateConfiguration.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fconfiguration%2FHibernateConfiguration.java)
+Несколько видов инициализации Scope (зона видимости Bean)
 
-`@Qualifier`
-[HibernateSessionFactory.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fconfiguration%2FHibernateSessionFactory.java)
+[Singleton, Prototype, | Session, Request, ...]
 
-`@Scope`
-[Application.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2FApplication.java)
+`Когда spring запускается он сначала все сканирует (метки) но пока ничего не создает.`
 
-- SINGLETON [Singleton.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fscope%2FSingleton.java)
-- PROTOTYPE [Prototype.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fscope%2FPrototype.java)
+HibernateConfiguration про BeanDefinition -> BeanFactory -> Bean
+
+| Параметр                            | Описание                                                                           |
+|-------------------------------------|------------------------------------------------------------------------------------|
+| Inversion of control(IoC) container | Библиотека создания прототипов                                                     |
+| Dependency Injection                | Технология автоматической подстановки при создании объекта                         |
+| Bean                                | Объект, жизненным циклом которого управляет Spring. (Все объекты созданные Spring) |
+| ApplicationContext                  | контейнер для Bean                                                                 |
+                                                                            |
+
+| Аннотация      | Описание                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| @Component     | [EmailSender.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fcore%2FEmailSender.java)                                  |
+| @Autowired     | [EmailSender.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fcore%2FEmailSender.java)                                  |
+| @Bean          | [HibernateConfiguration.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fconfiguration%2FHibernateConfiguration.java)   |
+| BeanDefinition | [HibernateConfiguration.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fconfiguration%2FHibernateConfiguration.java)   |
+| @Primary       | [HibernateConfiguration.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fconfiguration%2FHibernateConfiguration.java)   |
+| @Qualifier     | [HibernateSessionFactory.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fconfiguration%2FHibernateSessionFactory.java) |
+| @Scope         | [Application.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2FApplication.java)                                         |
+| @PostConstruct | [Application.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2FApplication.java)                                         |
+| @PreDestroy    | [Application.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2FApplication.java)                                         |
+| SINGLETON      | [Singleton.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fscope%2FSingleton.java)                                     |
+| PROTOTYPE      | [Prototype.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2Fscope%2FPrototype.java)                                     |
 
 Жизненный цикл Bean
-`@PostConstruct` `@PreDestroy`
-[Application.java](Lesson_2_Base%2Fsrc%2Fmain%2Fjava%2Fru%2Fgb%2FLesson2_basics%2FS2%2FApplication.java)
+
+#### Жизненный цикл Bean
+
+    - @PostConstruct
+      public void init()
+      вызывается в самом начале когда bean создается
+    - @PreDestroy
+      public void destroy()
+      вызывается в самом конце когда, например закрывается контекст contest.close()
+
+В целом когда контекст открывается Spring ищет у бинов @PostConstruct а при закрытии @PreDestroy
+
+- bean1, bean2, bean3(prototype), ...
+- каждый раз когда мы делаем getBean это по сути тоже что map.get("emailSender") достаем по сути
+  AppContext[bean1, bean2, bean3(prototype)] HashMap<String, Object>
+- ...
+- context.close()
+- -> bean1.preDestroy()
+- когда вызывается @PreDestroy у нас не уничтожается объект (он в хипе/оперативке)
+  уничтожится просто bean из контекста (из HashMap)
+  Spring работает с Java а не напрямую с оперативкой
 
 ### Архитектура "MVC"
 
-![img.png](resources/img.png)
+![img.png](resources/mvc.png)
 
 Сначала запрос http URI поступает на сервер `localhost:8080/home`
 
