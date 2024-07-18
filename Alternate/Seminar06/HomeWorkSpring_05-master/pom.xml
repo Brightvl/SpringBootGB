@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.gb_spring</groupId>
     <artifactId>HomeWorkSpring_05</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version> 
     <name>HomeWorkSpring_05</name>
     <description>HomeWorkSpring_05</description>
     <properties>

@@ -1,6 +1,10 @@
 package ru.gb.timesheet.controllers.rest;
 
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,64 +19,73 @@ import java.util.NoSuchElementException;
 @RequestMapping("/timesheets")
 public class TimesheetController {
 
-  // GET - получить - не содержит тела
-  // POST - create
-  // PUT - изменение
-  // PATCH - изменение
-  // DELETE - удаление
+    private final TimesheetService service;
 
-  // @GetMapping("/timesheets/{id}") // получить конкретную запись по идентификатору
-  // @DeleteMapping("/timesheets/{id}") // удалить конкретную запись по идентификатору
-  // @PutMapping("/timesheets/{id}") // обновить конкретную запись по идентификатору
+    public TimesheetController(TimesheetService service) {
+        this.service = service;
+    }
 
-  private final TimesheetService service;
+    @Operation(
+            summary = "Получить запись о рабочем времени",
+            description = "Возвращает запись о рабочем времени по её идентификатору",
+            responses = {
+                    @ApiResponse(description = "Успешный ответ", responseCode = "200", content = @Content(schema = @Schema(implementation = Timesheet.class))),
+                    @ApiResponse(description = "Запись не найдена", responseCode = "404", content = @Content(schema = @Schema(implementation = Void.class)))
+            }
+    )
+    @GetMapping("/{id}")
+    public ResponseEntity<Timesheet> get(@PathVariable @Parameter(description = "Идентификатор записи") Long id) {
+        return service.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
-  public TimesheetController(TimesheetService service) {
-    this.service = service;
-  }
+    @Operation(
+            summary = "Получить все записи о рабочем времени",
+            description = "Возвращает список всех записей о рабочем времени, возможно с фильтрацией по дате создания",
+            responses = {
+                    @ApiResponse(description = "Успешный ответ", responseCode = "200", content = @Content(schema = @Schema(implementation = Timesheet.class))),
+                    @ApiResponse(description = "Ошибка запроса", responseCode = "400", content = @Content(schema = @Schema(implementation = Void.class)))
+            }
+    )
+    @GetMapping
+    public ResponseEntity<List<Timesheet>> getAll(
+            @RequestParam(required = false) @Parameter(description = "Фильтр по дате создания до") LocalDate createdAtBefore,
+            @RequestParam(required = false) @Parameter(description = "Фильтр по дате создания после") LocalDate createdAtAfter
+    ) {
+        return ResponseEntity.ok(service.findAll(createdAtBefore, createdAtAfter));
+    }
 
-  @GetMapping("/{id}") // получить все
-  public ResponseEntity<Timesheet> get(@PathVariable Long id) {
-    return service.findById(id)
-      .map(ResponseEntity::ok)
-      .orElseGet(() -> ResponseEntity.notFound().build());
-  }
+    @Operation(
+            summary = "Создать запись о рабочем времени",
+            description = "Создает новую запись о рабочем времени",
+            responses = {
+                    @ApiResponse(description = "Запись успешно создана", responseCode = "201", content = @Content(schema = @Schema(implementation = Timesheet.class))),
+                    @ApiResponse(description = "Ошибка запроса", responseCode = "400", content = @Content(schema = @Schema(implementation = Void.class)))
+            }
+    )
+    @PostMapping
+    public ResponseEntity<Timesheet> create(@RequestBody @Parameter(description = "Данные новой записи") Timesheet timesheet) {
+        final Timesheet created = service.create(timesheet);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
 
-  // /timesheets
-  // /timesheets?createdAtBefore=2024-07-09
-  // /timesheets?createdAtAfter=2024-07-15
-  // /timesheets?createdAtAfter=2024-07-15&createdAtBefore=2024-06-05
-  @GetMapping
-  public ResponseEntity<List<Timesheet>> getAll(
-    @RequestParam(required = false) LocalDate createdAtBefore,
-    @RequestParam(required = false) LocalDate createdAtAfter
-  ) {
-    return ResponseEntity.ok(service.findAll(createdAtBefore, createdAtAfter));
-  }
+    @Operation(
+            summary = "Удалить запись о рабочем времени",
+            description = "Удаляет запись о рабочем времени по её идентификатору",
+            responses = {
+                    @ApiResponse(description = "Запись успешно удалена", responseCode = "204", content = @Content(schema = @Schema(implementation = Void.class))),
+                    @ApiResponse(description = "Запись не найдена", responseCode = "404", content = @Content(schema = @Schema(implementation = Void.class)))
+            }
+    )
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable @Parameter(description = "Идентификатор записи") Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
-  // client -> [spring-server -> ... -> TimesheetController
-  //                          -> exceptionHandler(e)
-  // client <- [spring-server <- ...
-
-  @PostMapping // создание нового ресурса
-  public ResponseEntity<Timesheet> create(@RequestBody Timesheet timesheet) {
-    final Timesheet created = service.create(timesheet);
-
-    // 201 Created
-    return ResponseEntity.status(HttpStatus.CREATED).body(created);
-  }
-
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Long id) {
-    service.delete(id);
-
-    // 204 No Content
-    return ResponseEntity.noContent().build();
-  }
-
-  @ExceptionHandler(NoSuchElementException.class)
-  public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
-    return ResponseEntity.notFound().build();
-  }
-
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
+        return ResponseEntity.notFound().build();
+    }
 }

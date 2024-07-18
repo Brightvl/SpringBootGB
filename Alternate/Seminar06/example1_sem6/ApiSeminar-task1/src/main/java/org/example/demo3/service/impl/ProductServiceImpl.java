@@ -45,4 +45,5 @@ public class ProductServiceImpl implements ProductService {
         Product productById = getProductById(id);
         productRepo.delete(productById);
     }
+    //Проверка свагером http://localhost:8080/swagger-ui/index.html
 }
