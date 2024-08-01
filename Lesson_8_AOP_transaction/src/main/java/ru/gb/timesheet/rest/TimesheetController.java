@@ -1,6 +1,5 @@
 package ru.gb.timesheet.rest;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/timesheets")
+//@Secured()
 public class TimesheetController {
 
   // GET - получить - не содержит тела
@@ -24,6 +24,11 @@ public class TimesheetController {
   // @GetMapping("/timesheets/{id}") // получить конкретную запись по идентификатору
   // @DeleteMapping("/timesheets/{id}") // удалить конкретную запись по идентификатору
   // @PutMapping("/timesheets/{id}") // обновить конкретную запись по идентификатору
+
+  // client -> server -> [DispatcherServlet -> TimesheetController]
+  //                           |
+  //                           |
+  //                           ->              ExceptionController
 
   private final TimesheetService service;
 

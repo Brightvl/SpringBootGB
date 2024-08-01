@@ -1,9 +1,12 @@
 package ru.gb.timesheet.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -17,5 +20,11 @@ public class User {
 
   @Column(name = "password")
   private String password;
+
+  @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+  @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+  @Enumerated(EnumType.STRING)
+  @Column(name = "role_name")
+  private Set<Role> roles;
 
 }
