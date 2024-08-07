@@ -184,3 +184,7 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
 | @Column(nullable = false)                           | Колонка допустимо занчение null      |
 | @Column(name = "new_name")                          | Конкретное имя для колонки           |
 |                                                     |                                      |
+
+### Spring Security
+
+![img.png](resources/security.png)
