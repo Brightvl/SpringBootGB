@@ -49,7 +49,6 @@ public class TimesheetPageService {
           });
         break;
       } catch (HttpServerErrorException e) {
-        // ignore
       }
     }
     if (timesheets == null) {
