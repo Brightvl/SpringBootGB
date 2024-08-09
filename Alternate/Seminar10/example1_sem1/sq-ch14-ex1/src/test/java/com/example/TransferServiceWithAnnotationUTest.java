@@ -30,7 +30,7 @@ public class TransferServiceWithAnnotationUTest {
     private AccountRepository repository;
 
     @Test
-    public void moneyTransferCorrectFlow(){
+    public void moneyTransferCorrectFlow() {
         //Блок предусловия//........................
         Account accountSource = new Account();
         accountSource.setId(1);
@@ -56,7 +56,7 @@ public class TransferServiceWithAnnotationUTest {
     }
 
     @Test
-    public void moneyTransferDestinationAccountNotFound(){
+    public void moneyTransferDestinationAccountNotFound() {
         //Блок предусловия//........................
         Account accountSource = new Account();
         accountSource.setId(1);
@@ -68,8 +68,8 @@ public class TransferServiceWithAnnotationUTest {
         //........................
 
         //Блок действия (вызова метода)//........................
-        assertThrows(AccountNotFoundException.class, () -> {service.transferMoney(1, 2, new BigDecimal(400));});
-        //........................
+        assertThrows(AccountNotFoundException.class, () -> service.transferMoney(1, 2, new BigDecimal(400)));
+        //........................landscape
 
         //Блок проверки действия//........................
         verify(repository, never()).changeAmount(anyLong(), any());

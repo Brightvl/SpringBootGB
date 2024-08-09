@@ -38,6 +38,8 @@ public class TestServiceWithAnnotationIntegration {
         accountDestination.setAmount(new BigDecimal(500));
 
 
+        /*по сути если будет вызван метод findById(Account.getId()) мы глушим данные которые должны получить с
+         репы и подменяем их на другой объект, который создали выше*/
         when(repository.findById(accountSource.getId())).thenReturn(Optional.of(accountSource));
         when(repository.findById(accountDestination.getId())).thenReturn(Optional.of(accountDestination));
         //........................
@@ -47,6 +49,7 @@ public class TestServiceWithAnnotationIntegration {
         //........................
 
         //Блок проверки действия//........................
+        /*По сути если хоть один не выполнится тест провалится*/
         verify(repository).changeAmount(1, new BigDecimal(600));
         verify(repository).changeAmount(2, new BigDecimal(900));
         //........................
